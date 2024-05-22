@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: class MLB</title>
+</head><body>
+<p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong>SportsInfoAPI.MLB</strong> = <a name="SportsInfoAPI.MLB">class MLB</a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor"><span class="code">&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="MLB-all_time_leaders"><strong>all_time_leaders</strong></a>(stat_leader)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;all-time&nbsp;leader&nbsp;for&nbsp;a&nbsp;specific&nbsp;baseball&nbsp;statistic&nbsp;from&nbsp;the&nbsp;Baseball-Reference&nbsp;website.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;sends&nbsp;a&nbsp;GET&nbsp;request&nbsp;to&nbsp;the&nbsp;Baseball-Reference&nbsp;website,&nbsp;parses&nbsp;the&nbsp;HTML&nbsp;response&nbsp;to&nbsp;extract&nbsp;the&nbsp;leaders&nbsp;table,<br>
+and&nbsp;then&nbsp;returns&nbsp;the&nbsp;player&nbsp;who&nbsp;is&nbsp;the&nbsp;all-time&nbsp;leader&nbsp;for&nbsp;the&nbsp;specified&nbsp;statistic.<br>
+&nbsp;<br>
+Parameters:<br>
+stat_leader&nbsp;(str):&nbsp;The&nbsp;specific&nbsp;statistic&nbsp;for&nbsp;which&nbsp;the&nbsp;all-time&nbsp;leader&nbsp;is&nbsp;to&nbsp;be&nbsp;fetched.<br>
+&nbsp;<br>
+Returns:<br>
+str:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;all-time&nbsp;leader&nbsp;if&nbsp;found,&nbsp;otherwise&nbsp;an&nbsp;error&nbsp;message.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_best_record"><strong>get_best_record</strong></a>(date: int = 2024)</dt><dd><span class="code">Retrieves&nbsp;the&nbsp;MLB&nbsp;standings&nbsp;for&nbsp;a&nbsp;specific&nbsp;date.<br>
+&nbsp;<br>
+Parameters:<br>
+date:&nbsp;The&nbsp;specific&nbsp;date&nbsp;for&nbsp;which&nbsp;the&nbsp;standings&nbsp;are&nbsp;requested.<br>
+&nbsp;<br>
+Returns:<br>
+dict:&nbsp;The&nbsp;MLB&nbsp;standings&nbsp;for&nbsp;the&nbsp;specified&nbsp;date.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_career_averages"><strong>get_career_averages</strong></a>(player_info: list)</dt><dd><span class="code">Retrieves&nbsp;the&nbsp;career&nbsp;batting&nbsp;average&nbsp;for&nbsp;a&nbsp;specified&nbsp;baseball&nbsp;player&nbsp;from&nbsp;baseball-reference.com.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;extracts&nbsp;player&nbsp;data&nbsp;from&nbsp;the&nbsp;specified&nbsp;player's&nbsp;page&nbsp;using&nbsp;their&nbsp;player&nbsp;ID&nbsp;and<br>
+determines&nbsp;the&nbsp;table&nbsp;to&nbsp;parse&nbsp;based&nbsp;on&nbsp;the&nbsp;player's&nbsp;active&nbsp;status.&nbsp;The&nbsp;function&nbsp;returns&nbsp;the&nbsp;player's<br>
+career&nbsp;batting&nbsp;average&nbsp;from&nbsp;the&nbsp;most&nbsp;relevant&nbsp;statistical&nbsp;table.&nbsp;The&nbsp;data&nbsp;extraction&nbsp;is&nbsp;handled&nbsp;using<br>
+`requests`&nbsp;for&nbsp;web&nbsp;scraping&nbsp;and&nbsp;`pandas`&nbsp;for&nbsp;parsing&nbsp;HTML&nbsp;tables.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;player_info&nbsp;(list):&nbsp;A&nbsp;list&nbsp;containing&nbsp;the&nbsp;player's&nbsp;ID&nbsp;as&nbsp;a&nbsp;string&nbsp;and&nbsp;their&nbsp;active&nbsp;status&nbsp;as&nbsp;a&nbsp;float.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;active&nbsp;status&nbsp;is&nbsp;expected&nbsp;to&nbsp;be&nbsp;the&nbsp;current&nbsp;year&nbsp;(e.g.,&nbsp;2024.0)&nbsp;if&nbsp;they&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currently&nbsp;active.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;str:&nbsp;The&nbsp;player's&nbsp;career&nbsp;batting&nbsp;average&nbsp;formatted&nbsp;to&nbsp;three&nbsp;decimal&nbsp;places,&nbsp;or&nbsp;an&nbsp;error&nbsp;message&nbsp;if&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;data&nbsp;cannot&nbsp;be&nbsp;found.<br>
+&nbsp;<br>
+Example:<br>
+<a href="#SportsInfoAPI.MLB-get_career_averages">get_career_averages</a>(["johndoe01",&nbsp;2024.0])<br>
+'0.278'&nbsp;&nbsp;#&nbsp;Example&nbsp;output,&nbsp;actual&nbsp;data&nbsp;may&nbsp;vary.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_day_night_wins"><strong>get_day_night_wins</strong></a>(requested_season=None, requested_team=None, day=False, night=False)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;number&nbsp;of&nbsp;games&nbsp;won&nbsp;by&nbsp;each&nbsp;team&nbsp;during&nbsp;the&nbsp;day&nbsp;and&nbsp;at&nbsp;night&nbsp;from&nbsp;a&nbsp;local&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;reads&nbsp;an&nbsp;Excel&nbsp;file&nbsp;containing&nbsp;game&nbsp;data,&nbsp;processes&nbsp;each&nbsp;game&nbsp;to&nbsp;generate&nbsp;facts&nbsp;about&nbsp;the&nbsp;wins,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;clingo&nbsp;library&nbsp;to&nbsp;solve&nbsp;a&nbsp;logic&nbsp;program&nbsp;based&nbsp;on&nbsp;these&nbsp;facts&nbsp;and&nbsp;some&nbsp;constraints.<br>
+The&nbsp;function&nbsp;counts&nbsp;the&nbsp;number&nbsp;of&nbsp;games&nbsp;won&nbsp;by&nbsp;each&nbsp;team&nbsp;during&nbsp;the&nbsp;day&nbsp;and&nbsp;at&nbsp;night.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;requested_season&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;season&nbsp;for&nbsp;which&nbsp;the&nbsp;wins&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;None.<br>
+-&nbsp;requested_team&nbsp;(str,&nbsp;optional):&nbsp;The&nbsp;team&nbsp;for&nbsp;which&nbsp;the&nbsp;wins&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;If&nbsp;None,&nbsp;wins&nbsp;for&nbsp;all&nbsp;teams&nbsp;are&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;None.<br>
+-&nbsp;day&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;only&nbsp;the&nbsp;games&nbsp;won&nbsp;during&nbsp;the&nbsp;day.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+-&nbsp;night&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;only&nbsp;the&nbsp;games&nbsp;won&nbsp;at&nbsp;night.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;tuple:&nbsp;A&nbsp;tuple&nbsp;of&nbsp;two&nbsp;lists,&nbsp;each&nbsp;containing&nbsp;tuples&nbsp;with&nbsp;the&nbsp;team&nbsp;and&nbsp;the&nbsp;count&nbsp;of&nbsp;wins.&nbsp;The&nbsp;first&nbsp;list&nbsp;contains&nbsp;the&nbsp;day&nbsp;wins&nbsp;and&nbsp;the&nbsp;second&nbsp;list&nbsp;contains&nbsp;the&nbsp;night&nbsp;wins.&nbsp;If&nbsp;there&nbsp;is&nbsp;an&nbsp;error&nbsp;during&nbsp;the&nbsp;fetch&nbsp;operation,&nbsp;an&nbsp;empty&nbsp;tuple&nbsp;is&nbsp;returned.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_extra_inning_walkoffs"><strong>get_extra_inning_walkoffs</strong></a>(requested_team, requested_year=2023)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;games&nbsp;won&nbsp;by&nbsp;a&nbsp;specific&nbsp;team&nbsp;in&nbsp;extra&nbsp;innings&nbsp;in&nbsp;a&nbsp;specific&nbsp;season&nbsp;from&nbsp;a&nbsp;local&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;reads&nbsp;an&nbsp;Excel&nbsp;file&nbsp;containing&nbsp;game&nbsp;data,&nbsp;processes&nbsp;each&nbsp;game&nbsp;to&nbsp;generate&nbsp;facts&nbsp;about&nbsp;home&nbsp;team&nbsp;wins,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;clingo&nbsp;library&nbsp;to&nbsp;solve&nbsp;a&nbsp;logic&nbsp;program&nbsp;based&nbsp;on&nbsp;these&nbsp;facts&nbsp;and&nbsp;some&nbsp;constraints.<br>
+The&nbsp;function&nbsp;returns&nbsp;the&nbsp;games&nbsp;won&nbsp;by&nbsp;the&nbsp;specified&nbsp;team&nbsp;in&nbsp;extra&nbsp;innings&nbsp;in&nbsp;the&nbsp;specified&nbsp;season.<br>
+&nbsp;<br>
+Parameters:<br>
+requested_team&nbsp;(str):&nbsp;The&nbsp;team&nbsp;for&nbsp;which&nbsp;the&nbsp;extra&nbsp;inning&nbsp;walkoff&nbsp;wins&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.<br>
+requested_year&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;season&nbsp;for&nbsp;which&nbsp;the&nbsp;extra&nbsp;inning&nbsp;walkoff&nbsp;wins&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+&nbsp;<br>
+Returns:<br>
+list:&nbsp;A&nbsp;list&nbsp;of&nbsp;tuples,&nbsp;each&nbsp;containing&nbsp;the&nbsp;game&nbsp;and&nbsp;the&nbsp;team&nbsp;that&nbsp;won&nbsp;in&nbsp;extra&nbsp;innings.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_games_with_many_pitchers"><strong>get_games_with_many_pitchers</strong></a>(requested_team, min_pitchers, requested_year=2023)</dt><dd><span class="code">Identifies&nbsp;and&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;games&nbsp;where&nbsp;a&nbsp;specified&nbsp;baseball&nbsp;team&nbsp;used&nbsp;a&nbsp;minimum&nbsp;number&nbsp;of&nbsp;pitchers&nbsp;in&nbsp;a&nbsp;given&nbsp;year.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;loads&nbsp;game&nbsp;data&nbsp;from&nbsp;an&nbsp;Excel&nbsp;file&nbsp;named&nbsp;'Data.xlsx',&nbsp;processes&nbsp;the&nbsp;data&nbsp;to&nbsp;extract&nbsp;relevant&nbsp;game&nbsp;information,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;`clingo`&nbsp;library&nbsp;for&nbsp;Answer&nbsp;Set&nbsp;Programming&nbsp;(ASP)&nbsp;to&nbsp;identify&nbsp;games&nbsp;that&nbsp;meet&nbsp;the&nbsp;specified&nbsp;criteria&nbsp;of<br>
+pitcher&nbsp;usage.&nbsp;The&nbsp;function&nbsp;processes&nbsp;each&nbsp;sheet&nbsp;in&nbsp;the&nbsp;Excel&nbsp;workbook,&nbsp;constructs&nbsp;ASP&nbsp;facts&nbsp;and&nbsp;rules,&nbsp;and&nbsp;queries&nbsp;these<br>
+facts&nbsp;against&nbsp;the&nbsp;rules&nbsp;to&nbsp;find&nbsp;games&nbsp;where&nbsp;the&nbsp;number&nbsp;of&nbsp;pitchers&nbsp;used&nbsp;by&nbsp;the&nbsp;home&nbsp;team&nbsp;exceeds&nbsp;the&nbsp;specified&nbsp;minimum.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;requested_team&nbsp;(str):&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;team&nbsp;for&nbsp;which&nbsp;the&nbsp;games&nbsp;are&nbsp;queried.<br>
+-&nbsp;min_pitchers&nbsp;(int):&nbsp;The&nbsp;minimum&nbsp;number&nbsp;of&nbsp;pitchers&nbsp;that&nbsp;must&nbsp;have&nbsp;been&nbsp;used&nbsp;in&nbsp;a&nbsp;game&nbsp;for&nbsp;it&nbsp;to&nbsp;be&nbsp;included&nbsp;in&nbsp;the&nbsp;result.<br>
+-&nbsp;requested_year&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;year&nbsp;for&nbsp;which&nbsp;the&nbsp;games&nbsp;are&nbsp;queried.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list&nbsp;of&nbsp;tuples:&nbsp;Each&nbsp;tuple&nbsp;contains&nbsp;the&nbsp;date&nbsp;of&nbsp;the&nbsp;game&nbsp;and&nbsp;the&nbsp;team&nbsp;name,&nbsp;for&nbsp;games&nbsp;that&nbsp;meet&nbsp;the&nbsp;criteria.<br>
+&nbsp;<br>
+Example:<br>
+<a href="#SportsInfoAPI.MLB-get_games_with_many_pitchers">get_games_with_many_pitchers</a>("ANA",&nbsp;5,&nbsp;2023)<br>
+[("20230326,ANA")]&nbsp;&nbsp;#&nbsp;Example&nbsp;output</span></dd></dl>
+
+<dl><dt><a name="MLB-get_high_scoring_games"><strong>get_high_scoring_games</strong></a>(requested_team, requested_score=1, requested_year=None)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;high&nbsp;scoring&nbsp;games&nbsp;of&nbsp;a&nbsp;specific&nbsp;team&nbsp;from&nbsp;a&nbsp;local&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;reads&nbsp;an&nbsp;Excel&nbsp;file&nbsp;containing&nbsp;game&nbsp;data,&nbsp;processes&nbsp;each&nbsp;game&nbsp;to&nbsp;generate&nbsp;facts&nbsp;about&nbsp;the&nbsp;scores,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;clingo&nbsp;library&nbsp;to&nbsp;solve&nbsp;a&nbsp;logic&nbsp;program&nbsp;based&nbsp;on&nbsp;these&nbsp;facts&nbsp;and&nbsp;some&nbsp;constraints.<br>
+The&nbsp;function&nbsp;returns&nbsp;the&nbsp;games&nbsp;where&nbsp;the&nbsp;specified&nbsp;team&nbsp;scored&nbsp;at&nbsp;least&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;runs.<br>
+&nbsp;<br>
+Parameters:<br>
+requested_team&nbsp;(str):&nbsp;The&nbsp;team&nbsp;for&nbsp;which&nbsp;the&nbsp;high&nbsp;scoring&nbsp;games&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.<br>
+requested_score&nbsp;(int):&nbsp;The&nbsp;minimum&nbsp;number&nbsp;of&nbsp;runs&nbsp;scored&nbsp;for&nbsp;a&nbsp;game&nbsp;to&nbsp;be&nbsp;considered&nbsp;high&nbsp;scoring.<br>
+requested_year(int):&nbsp;Allows&nbsp;you&nbsp;to&nbsp;only&nbsp;parse&nbsp;through&nbsp;a&nbsp;single&nbsp;table<br>
+&nbsp;<br>
+Returns:<br>
+list:&nbsp;A&nbsp;list&nbsp;of&nbsp;tuples,&nbsp;each&nbsp;containing&nbsp;the&nbsp;game&nbsp;and&nbsp;the&nbsp;team&nbsp;that&nbsp;scored&nbsp;at&nbsp;least&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;runs.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_home_team_wins"><strong>get_home_team_wins</strong></a>(requested_season=2023, diff=1, start_date=0, end_date=30000000, requested_team=None)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;games&nbsp;won&nbsp;by&nbsp;home&nbsp;teams&nbsp;in&nbsp;a&nbsp;specific&nbsp;season&nbsp;from&nbsp;a&nbsp;local&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;reads&nbsp;an&nbsp;Excel&nbsp;file&nbsp;containing&nbsp;game&nbsp;data,&nbsp;processes&nbsp;each&nbsp;game&nbsp;to&nbsp;generate&nbsp;facts&nbsp;about&nbsp;home&nbsp;team&nbsp;wins,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;clingo&nbsp;library&nbsp;to&nbsp;solve&nbsp;a&nbsp;logic&nbsp;program&nbsp;based&nbsp;on&nbsp;these&nbsp;facts&nbsp;and&nbsp;some&nbsp;constraints.<br>
+The&nbsp;function&nbsp;returns&nbsp;the&nbsp;games&nbsp;won&nbsp;by&nbsp;home&nbsp;teams&nbsp;where&nbsp;the&nbsp;difference&nbsp;in&nbsp;scores&nbsp;is&nbsp;greater&nbsp;than&nbsp;a&nbsp;specified&nbsp;value.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;requested_season&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;season&nbsp;for&nbsp;which&nbsp;the&nbsp;home&nbsp;team&nbsp;wins&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+-&nbsp;diff&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;minimum&nbsp;difference&nbsp;in&nbsp;scores&nbsp;for&nbsp;a&nbsp;game&nbsp;to&nbsp;be&nbsp;considered.&nbsp;Defaults&nbsp;to&nbsp;1.<br>
+-&nbsp;start_date&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;start&nbsp;date&nbsp;for&nbsp;the&nbsp;period&nbsp;for&nbsp;which&nbsp;the&nbsp;games&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;00000000.<br>
+-&nbsp;end_date&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;end&nbsp;date&nbsp;for&nbsp;the&nbsp;period&nbsp;for&nbsp;which&nbsp;the&nbsp;games&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;30000000.<br>
+-&nbsp;requested_team&nbsp;(str,&nbsp;optional):&nbsp;The&nbsp;team&nbsp;for&nbsp;which&nbsp;the&nbsp;games&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;If&nbsp;None,&nbsp;games&nbsp;for&nbsp;all&nbsp;teams&nbsp;are&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;None.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list:&nbsp;A&nbsp;list&nbsp;of&nbsp;tuples,&nbsp;each&nbsp;containing&nbsp;the&nbsp;game&nbsp;and&nbsp;the&nbsp;home&nbsp;team&nbsp;that&nbsp;won.&nbsp;If&nbsp;there&nbsp;is&nbsp;an&nbsp;error&nbsp;during&nbsp;the&nbsp;fetch&nbsp;operation,&nbsp;an&nbsp;empty&nbsp;list&nbsp;is&nbsp;returned.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_mvps"><strong>get_mvps</strong></a>(year=2023, AL=False, NL=False)</dt><dd><span class="code">Retrieves&nbsp;the&nbsp;Major&nbsp;League&nbsp;Baseball&nbsp;(MLB)&nbsp;MVP(s)&nbsp;for&nbsp;a&nbsp;specified&nbsp;year&nbsp;from&nbsp;baseball-reference.com.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;fetches&nbsp;the&nbsp;MVP&nbsp;award&nbsp;winner(s)&nbsp;based&nbsp;on&nbsp;the&nbsp;year&nbsp;and&nbsp;the&nbsp;league&nbsp;(American&nbsp;League&nbsp;or&nbsp;National&nbsp;League).<br>
+If&nbsp;both&nbsp;league&nbsp;flags&nbsp;(AL&nbsp;and&nbsp;NL)&nbsp;are&nbsp;False&nbsp;or&nbsp;True,&nbsp;it&nbsp;returns&nbsp;both&nbsp;MVPs&nbsp;for&nbsp;that&nbsp;year;&nbsp;otherwise,&nbsp;it&nbsp;returns<br>
+the&nbsp;MVP&nbsp;for&nbsp;the&nbsp;specified&nbsp;league.&nbsp;The&nbsp;data&nbsp;is&nbsp;extracted&nbsp;from&nbsp;the&nbsp;baseball-reference&nbsp;MVP&nbsp;awards&nbsp;page&nbsp;using&nbsp;`requests`<br>
+and&nbsp;parsed&nbsp;using&nbsp;`pandas`.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;year&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;year&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;MVPs&nbsp;for.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+-&nbsp;AL&nbsp;(bool,&nbsp;optional):&nbsp;Set&nbsp;to&nbsp;True&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;American&nbsp;League&nbsp;MVP.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+-&nbsp;NL&nbsp;(bool,&nbsp;optional):&nbsp;Set&nbsp;to&nbsp;True&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;National&nbsp;League&nbsp;MVP.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list&nbsp;or&nbsp;str:&nbsp;The&nbsp;name(s)&nbsp;of&nbsp;the&nbsp;MVP(s)&nbsp;as&nbsp;a&nbsp;list&nbsp;if&nbsp;both&nbsp;flags&nbsp;are&nbsp;specified,&nbsp;or&nbsp;a&nbsp;single&nbsp;name&nbsp;if&nbsp;one&nbsp;flag&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified.&nbsp;Returns&nbsp;an&nbsp;error&nbsp;message&nbsp;if&nbsp;the&nbsp;MVP&nbsp;table&nbsp;cannot&nbsp;be&nbsp;found.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;HTTPError:&nbsp;If&nbsp;there&nbsp;is&nbsp;an&nbsp;issue&nbsp;during&nbsp;the&nbsp;web&nbsp;request.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;there&nbsp;is&nbsp;an&nbsp;error&nbsp;in&nbsp;calculating&nbsp;the&nbsp;index&nbsp;or&nbsp;parsing&nbsp;the&nbsp;table.<br>
+&nbsp;<br>
+Example:<br>
+<a href="#SportsInfoAPI.MLB-get_mvps">get_mvps</a>(year=2022,&nbsp;AL=True)&nbsp;&nbsp;#&nbsp;Retrieve&nbsp;the&nbsp;2022&nbsp;American&nbsp;League&nbsp;MVP<br>
+'Shohei&nbsp;Ohtani'&nbsp;&nbsp;#&nbsp;Example&nbsp;output,&nbsp;actual&nbsp;data&nbsp;may&nbsp;vary.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_player_id"><strong>get_player_id</strong></a>(last_name, first_name, bbref=False, retro=False, fangraph=False)</dt><dd><span class="code">Retrieves&nbsp;the&nbsp;player's&nbsp;ID&nbsp;based&nbsp;on&nbsp;their&nbsp;last&nbsp;name,&nbsp;first&nbsp;name,&nbsp;and&nbsp;possibly&nbsp;other&nbsp;criteria.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;uses&nbsp;the&nbsp;`pybaseball`&nbsp;library&nbsp;to&nbsp;look&nbsp;up&nbsp;the&nbsp;player's&nbsp;ID.&nbsp;It&nbsp;can&nbsp;return&nbsp;the&nbsp;ID&nbsp;from&nbsp;multiple&nbsp;MLB&nbsp;databases<br>
+depending&nbsp;on&nbsp;the&nbsp;flags&nbsp;set.<br>
+&nbsp;<br>
+Parameters:<br>
+last_name&nbsp;(str):&nbsp;The&nbsp;last&nbsp;name&nbsp;of&nbsp;the&nbsp;player.<br>
+first_name&nbsp;(str):&nbsp;The&nbsp;first&nbsp;name&nbsp;of&nbsp;the&nbsp;player.<br>
+bbref&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;the&nbsp;player's&nbsp;ID&nbsp;from&nbsp;the&nbsp;Baseball-Reference&nbsp;database.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+retro&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;the&nbsp;player's&nbsp;ID&nbsp;from&nbsp;the&nbsp;Retrosheet&nbsp;database.&nbsp;Defaults&nbsp;to&nbsp;False.&nbsp;(Not&nbsp;implemented&nbsp;in&nbsp;this&nbsp;function)<br>
+fangraph&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;the&nbsp;player's&nbsp;ID&nbsp;from&nbsp;the&nbsp;Fangraphs&nbsp;database.&nbsp;Defaults&nbsp;to&nbsp;False.&nbsp;(Not&nbsp;implemented&nbsp;in&nbsp;this&nbsp;function)<br>
+&nbsp;<br>
+Returns:<br>
+DataFrame&nbsp;or&nbsp;list:&nbsp;A&nbsp;pandas&nbsp;DataFrame&nbsp;containing&nbsp;the&nbsp;player's&nbsp;ID&nbsp;if&nbsp;bbref&nbsp;is&nbsp;False,&nbsp;otherwise&nbsp;a&nbsp;list&nbsp;containing&nbsp;the&nbsp;player's&nbsp;ID&nbsp;and&nbsp;the&nbsp;last&nbsp;year&nbsp;they&nbsp;played.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_team_results"><strong>get_team_results</strong></a>(team, year, date=None, winner=False, loser=False)</dt><dd><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;Retrieves&nbsp;the&nbsp;results&nbsp;of&nbsp;a&nbsp;specific&nbsp;team&nbsp;for&nbsp;a&nbsp;given&nbsp;year.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;uses&nbsp;the&nbsp;`schedule_and_record`&nbsp;function&nbsp;from&nbsp;the&nbsp;`pybaseball`&nbsp;module&nbsp;<br>
+to&nbsp;fetch&nbsp;the&nbsp;results&nbsp;of&nbsp;a&nbsp;specific&nbsp;team&nbsp;for&nbsp;a&nbsp;given&nbsp;year.&nbsp;The&nbsp;results&nbsp;are&nbsp;returned&nbsp;as&nbsp;a&nbsp;<br>
+pandas&nbsp;DataFrame,&nbsp;which&nbsp;is&nbsp;then&nbsp;converted&nbsp;to&nbsp;a&nbsp;dictionary&nbsp;before&nbsp;being&nbsp;returned.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;team&nbsp;(str):&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;team.<br>
+-&nbsp;year&nbsp;(int):&nbsp;The&nbsp;year&nbsp;for&nbsp;which&nbsp;the&nbsp;results&nbsp;are&nbsp;requested.<br>
+-&nbsp;date&nbsp;(str,&nbsp;optional):&nbsp;The&nbsp;specific&nbsp;date&nbsp;for&nbsp;which&nbsp;the&nbsp;results&nbsp;are&nbsp;requested.&nbsp;Defaults&nbsp;to&nbsp;None.<br>
+-&nbsp;winner&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;only&nbsp;the&nbsp;games&nbsp;where&nbsp;the&nbsp;team&nbsp;won.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+-&nbsp;loser&nbsp;(bool,&nbsp;optional):&nbsp;If&nbsp;True,&nbsp;returns&nbsp;only&nbsp;the&nbsp;games&nbsp;where&nbsp;the&nbsp;team&nbsp;lost.&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;dict:&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;results&nbsp;of&nbsp;the&nbsp;specified&nbsp;team&nbsp;for&nbsp;the&nbsp;given&nbsp;year.&nbsp;Each&nbsp;key-value&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pair&nbsp;in&nbsp;the&nbsp;dictionary&nbsp;corresponds&nbsp;to&nbsp;a&nbsp;column&nbsp;and&nbsp;its&nbsp;value&nbsp;for&nbsp;the&nbsp;games&nbsp;on&nbsp;the&nbsp;team's&nbsp;schedule.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;error&nbsp;during&nbsp;the&nbsp;fetch&nbsp;operation.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_umpire_with_most_runs"><strong>get_umpire_with_most_runs</strong></a>(requested_season=None)</dt><dd><span class="code">Retrieves&nbsp;the&nbsp;umpire&nbsp;who&nbsp;oversaw&nbsp;the&nbsp;most&nbsp;total&nbsp;runs&nbsp;in&nbsp;games&nbsp;for&nbsp;a&nbsp;specified&nbsp;MLB&nbsp;season&nbsp;using&nbsp;data&nbsp;from&nbsp;an&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;processes&nbsp;game&nbsp;data&nbsp;from&nbsp;an&nbsp;Excel&nbsp;workbook&nbsp;named&nbsp;'Data.xlsx'&nbsp;to&nbsp;calculate&nbsp;the&nbsp;total&nbsp;runs&nbsp;scored&nbsp;in&nbsp;each<br>
+game&nbsp;an&nbsp;umpire&nbsp;oversaw&nbsp;during&nbsp;the&nbsp;specified&nbsp;season.&nbsp;The&nbsp;function&nbsp;uses&nbsp;the&nbsp;`clingo`&nbsp;library&nbsp;to&nbsp;implement&nbsp;Answer&nbsp;Set&nbsp;Programming&nbsp;(ASP)<br>
+that&nbsp;determines&nbsp;which&nbsp;umpire&nbsp;had&nbsp;the&nbsp;highest&nbsp;total&nbsp;run&nbsp;count&nbsp;over&nbsp;the&nbsp;season.&nbsp;The&nbsp;results&nbsp;are&nbsp;aggregated&nbsp;and&nbsp;evaluated&nbsp;<br>
+using&nbsp;ASP&nbsp;rules&nbsp;and&nbsp;returned&nbsp;in&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;requested_season&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;MLB&nbsp;season&nbsp;for&nbsp;which&nbsp;to&nbsp;find&nbsp;the&nbsp;umpire&nbsp;with&nbsp;the&nbsp;most&nbsp;runs&nbsp;observed.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list&nbsp;of&nbsp;tuples:&nbsp;Each&nbsp;tuple&nbsp;contains&nbsp;the&nbsp;umpire&nbsp;ID,&nbsp;the&nbsp;season,&nbsp;and&nbsp;the&nbsp;total&nbsp;runs&nbsp;overseen&nbsp;by&nbsp;that&nbsp;umpire.<br>
+&nbsp;<br>
+Example:<br>
+<a href="#SportsInfoAPI.MLB-get_umpire_with_most_runs">get_umpire_with_most_runs</a>(2023)<br>
+[('jim123',&nbsp;'2023',&nbsp;172)]&nbsp;&nbsp;#&nbsp;Example&nbsp;output,&nbsp;actual&nbsp;data&nbsp;may&nbsp;vary&nbsp;depending&nbsp;on&nbsp;the&nbsp;dataset.</span></dd></dl>
+
+<dl><dt><a name="MLB-get_winning_streak"><strong>get_winning_streak</strong></a>(year=2023, requested_team=None)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;longest&nbsp;winning&nbsp;streak&nbsp;of&nbsp;each&nbsp;team&nbsp;in&nbsp;a&nbsp;specific&nbsp;season&nbsp;from&nbsp;a&nbsp;local&nbsp;Excel&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;reads&nbsp;an&nbsp;Excel&nbsp;file&nbsp;containing&nbsp;game&nbsp;data,&nbsp;processes&nbsp;each&nbsp;game&nbsp;to&nbsp;generate&nbsp;facts&nbsp;about&nbsp;the&nbsp;wins,<br>
+and&nbsp;then&nbsp;uses&nbsp;the&nbsp;clingo&nbsp;library&nbsp;to&nbsp;solve&nbsp;a&nbsp;logic&nbsp;program&nbsp;based&nbsp;on&nbsp;these&nbsp;facts&nbsp;and&nbsp;some&nbsp;constraints.<br>
+The&nbsp;function&nbsp;calculates&nbsp;the&nbsp;longest&nbsp;winning&nbsp;streak&nbsp;for&nbsp;each&nbsp;team&nbsp;in&nbsp;the&nbsp;specified&nbsp;season.<br>
+&nbsp;<br>
+Parameters:<br>
+year&nbsp;(str,&nbsp;optional):&nbsp;The&nbsp;season&nbsp;for&nbsp;which&nbsp;the&nbsp;longest&nbsp;winning&nbsp;streaks&nbsp;are&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+requested_team(str,optional):&nbsp;Allows&nbsp;the&nbsp;user&nbsp;to&nbsp;get&nbsp;only&nbsp;the&nbsp;longest&nbsp;streak&nbsp;for&nbsp;the&nbsp;team&nbsp;they&nbsp;ask&nbsp;for<br>
+Returns:<br>
+calls&nbsp;a&nbsp;function&nbsp;to&nbsp;check_streaks</span></dd></dl>
+
+<dl><dt><a name="MLB-get_world_series_winner"><strong>get_world_series_winner</strong></a>(year=2023, table=0)</dt><dd><span class="code">Fetches&nbsp;the&nbsp;winner&nbsp;of&nbsp;the&nbsp;World&nbsp;Series&nbsp;for&nbsp;a&nbsp;specific&nbsp;year&nbsp;from&nbsp;the&nbsp;Baseball-Reference&nbsp;website.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;sends&nbsp;a&nbsp;GET&nbsp;request&nbsp;to&nbsp;the&nbsp;Baseball-Reference&nbsp;website,&nbsp;parses&nbsp;the&nbsp;HTML&nbsp;response&nbsp;to&nbsp;extract&nbsp;the&nbsp;World&nbsp;Series&nbsp;table,<br>
+and&nbsp;then&nbsp;returns&nbsp;the&nbsp;team&nbsp;that&nbsp;won&nbsp;the&nbsp;World&nbsp;Series&nbsp;in&nbsp;the&nbsp;specified&nbsp;year.<br>
+&nbsp;<br>
+Parameters:<br>
+year&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;year&nbsp;for&nbsp;which&nbsp;the&nbsp;World&nbsp;Series&nbsp;winner&nbsp;is&nbsp;to&nbsp;be&nbsp;fetched.&nbsp;Defaults&nbsp;to&nbsp;2023.<br>
+table&nbsp;(int,&nbsp;optional):&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;World&nbsp;Series&nbsp;table&nbsp;on&nbsp;the&nbsp;page.&nbsp;Defaults&nbsp;to&nbsp;0.<br>
+&nbsp;<br>
+Returns:<br>
+str:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;World&nbsp;Series&nbsp;winner&nbsp;if&nbsp;found,&nbsp;otherwise&nbsp;an&nbsp;error&nbsp;message.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table>
+</body></html>
